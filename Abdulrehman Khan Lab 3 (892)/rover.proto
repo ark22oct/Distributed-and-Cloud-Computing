@@ -1,0 +1,43 @@
+syntax = "proto3";
+
+service RoverControl {
+  rpc GetMap(MapRequest) returns (MapResponse) {}
+  rpc GetCommands(CommandRequest) returns (CommandResponse) {}
+  rpc GetMineSerialNumber(MineSerialNumberRequest) returns (MineSerialNumberResponse) {}
+  rpc ShareMinePin(MinePinRequest) returns (MinePinResponse) {}
+  rpc NotifyExecutionStatus(StatusRequest) returns (ExecutionStatusResponse) {}
+}
+
+message MapRequest {}
+
+message MapResponse {
+  repeated string map_data = 1;
+}
+
+message CommandRequest {
+  int32 rover_number = 1;
+}
+
+message CommandResponse {
+  string commands = 1;
+}
+
+message MineSerialNumberRequest {}
+
+message MineSerialNumberResponse {
+  repeated string mine_data = 1;
+}
+
+message MinePinRequest {
+  string mine_serial_number = 1;
+}
+
+message MinePinResponse {}
+
+message StatusRequest {
+  int32 rover_number = 1;
+}
+
+message ExecutionStatusResponse {
+  bool status_received = 1;
+}
