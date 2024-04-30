@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Operator UI</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+        
+        #container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        h1, h2 {
+            color: #333;
+        }
+        
+        button {
+            margin-right: 10px;
+            margin-bottom: 10px;
+            padding: 8px 16px;
+            font-size: 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            background-color: #007bff;
+            color: #fff;
+        }
+        
+        button:hover {
+            background-color: #0056b3;
+        }
+        
+        #output {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <h1>Operator UI</h1>
+        
+        <h2>Map Endpoints:</h2>
+        <button onclick="getMap()">Get Map</button>
+        <button onclick="updateMap()">Update Map</button>
+        
+        <h2>Mines Endpoints:</h2>
+        <button onclick="getMines()">Get Mines</button>
+        <button onclick="createMine()">Create Mine</button>
+        <button onclick="updateMine()">Update Mine</button>
+        <button onclick="deleteMine()">Delete Mine</button>
+        
+        <h2>Rover Endpoints:</h2>
+        <button onclick="getRovers()">Get Rovers</button>
+        <button onclick="createRover()">Create Rover</button>
+        <button onclick="getRoverById()">Get Rover by ID</button>
+        <button onclick="sendCommands()">Send Commands to Rover</button>
+        <button onclick="dispatchRover()">Dispatch Rover</button>
+        <button onclick="deleteRover()">Delete Rover</button>
+        
+        <div id="output"></div>
+    </div>
+    
+    <script>
+        const BASE_URL = "http://localhost:8000";
+        
+        function getMap() {
+            fetch(`${BASE_URL}/map`)
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById("output").innerText = JSON.stringify(data);
+            })
+            .catch(error => console.error('Error:', error));
+        }
+        
+        function updateMap() {
+            const rows = parseInt(prompt("Enter number of rows:"));
+            const cols = parseInt(prompt("Enter number of columns:"));
+            const newMap = [];
+            for (let i = 0; i < rows; i++) {
+                const row = prompt(`Enter row ${i + 1} (comma-separated values):`);
+                newMap.push(row.split(',').map(Number));
+            }
+            
+            fetch(`${BASE_URL}/map`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(newMap)
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById("output").innerText = JSON.stringify(data);
+            })
+            .catch(error => console.error('Error:', error));
+        }
+        
+        function getMines() {
+            fetch(`${BASE_URL}/mines`)
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById("output").innerText = JSON.stringify(data);
+            })
+            .catch(error => console.error('Error:', error));
+        }
+        
+        function createMine() {
+            const x = parseInt(prompt("Enter X coordinate:"));
+            const y = parseInt(prompt("Enter Y coordinate:"));
+            const serial = prompt("Enter serial number:");
+            
+            fetch(`${BASE_URL}/mines`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ x, y, serial })
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById("output").innerText = JSON.stringify(data);
+            })
+            .catch(error => console.error('Error:', error));
+        }
+        
+        function updateMine() {
+            const mineId = prompt("Enter mine ID to update:");
+            const x = prompt("Enter X coordinate (optional, leave blank to keep unchanged):");
+            const y = prompt("Enter Y coordinate (optional, leave blank to keep unchanged):");
+            const serial = prompt("Enter serial number (optional, leave blank to keep unchanged):");
+            
+            const data = {};
+            if (x) data.x = parseInt(x);
+            if (y) data.y = parseInt(y);
+            if (serial) data.serial = serial;
+            
+            fetch(`${BASE_URL}/mines/${mineId}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById("output").innerText = JSON.stringify(data);
+            })
+            .catch(error => console.error('Error:', error));
+        }
+        
+        function deleteMine() {
+            const mineId = prompt("Enter mine ID to delete:");
+            
+            fetch(`${BASE_URL}/mines/${mineId}`, {
+                method: 'DELETE'
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById("output").innerText = JSON.stringify(data);
+            })
+            .catch(error => console.error('Error:', error));
+        }
+        
+        function getRovers() {
+            fetch(`${BASE_URL}/rovers`)
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById("output").innerText = JSON.stringify(data);
+            })
+            .catch(error => console.error('Error:', error));
+        }
+        
+        function createRover() {
+            const commands = prompt("Enter commands:");
+            
+            fetch(`${BASE_URL}/rovers`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ commands })
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById("output").innerText = JSON.stringify(data);
+            })
+            .catch(error => console.error('Error:', error));
+        }
+        
+        function getRoverById() {
+            const roverId = prompt("Enter rover ID:");
+            
+            fetch(`${BASE_URL}/rovers/${roverId}`)
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById("output").innerText = JSON.stringify(data);
+            })
+            .catch(error => console.error('Error:', error));
+        }
+        
+        function sendCommands() {
+            const roverId = prompt("Enter rover ID:");
+            const commands = prompt("Enter commands:");
+            
+            fetch(`${BASE_URL}/rovers/${roverId}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ commands })
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById("output").innerText = JSON.stringify(data);
+            })
+            .catch(error => console.error('Error:', error));
+        }
+        
+        function dispatchRover() {
+            const roverId = prompt("Enter rover ID:");
+            
+            fetch(`${BASE_URL}/rovers/${roverId}/dispatch`, {
+                method: 'POST'
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById("output").innerText = JSON.stringify(data);
+            })
+            .catch(error => console.error('Error:', error));
+        }
+        
+        function deleteRover() {
+            const roverId = prompt("Enter rover ID to delete:");
+            
+            fetch(`${BASE_URL}/rovers/${roverId}`, {
+                method: 'DELETE'
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById("output").innerText = JSON.stringify(data);
+            })
+            .catch(error => console.error('Error:', error));
+        }
+    </script>
+</body>
+</html>
+
