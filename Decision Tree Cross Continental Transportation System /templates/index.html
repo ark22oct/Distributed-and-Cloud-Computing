@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cross Continent Transportation System</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        font-family: monospace;
+        background-color: #121212; /* Dark background */
+        color: #fff; /* White text */
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+
+      .container {
+        max-width: 600px;
+        background-color: #1e1e1e; /* Dark container background */
+        border-radius: 10px;
+        box-shadow: 0 0 20px rgba(255, 255, 255, 0.1); /* White box shadow for depth */
+        padding: 40px; /* Increased padding */
+        box-sizing: border-box;
+        text-align: center;
+      }
+
+      h1 {
+        color: #fff; /* White text color */
+        margin-bottom: 30px;
+      }
+
+      label {
+        display: block;
+        margin-bottom: 10px;
+        color: #ccc; /* Light gray label text color */
+        text-align: left; /* Align labels to the left */
+      }
+
+      select,
+      input[type="number"] {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 15px;
+        border: 1px solid #444; /* Dark gray border */
+        border-radius: 5px;
+        box-sizing: border-box;
+        font-family: inherit; /* Inherit font from body */
+        background-color: #333; /* Dark input background */
+        color: #fff; /* White text color */
+      }
+
+      button {
+        width: 100%;
+        padding: 15px; /* Increased padding for better visibility */
+        background-color: #4caf50; /* Deep rich green color */
+        color: #fff; /* White text color */
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-family: inherit; /* Inherit font from body */
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Added depth to the button */
+      }
+
+      button:hover {
+        background-color: #45a049; /* Darker shade on hover */
+      }
+
+      .result {
+        margin-top: 20px;
+        padding: 20px;
+        background-color: #333; /* Dark result background */
+        border-radius: 5px;
+        display: none;
+      }
+
+      .result h2 {
+        color: #fff; /* White text color */
+        margin-top: 0;
+        font-family: monospace;
+      }
+
+      .result p {
+        margin-bottom: 10px;
+        color: #d8a523; /* Light gray text color */
+        font-family: monospace;
+      }
+
+      a {
+        color: #50bec0; /* Deep rich green color */
+        text-decoration: none;
+        display: block;
+        text-align: center;
+        margin-top: 20px;
+      }
+
+      a:hover {
+        text-decoration: underline;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Cross Continent Transportation System 📦</h1>
+      <form id="transportationForm">
+        <label for="startLocation">Start Location:</label>
+        <select id="startLocation" name="startLocation">
+          <option value="New York City, US">New York City, US</option>
+          <option value="Tokyo, JP">Tokyo, JP</option>
+          <option value="London, UK">London, UK</option>
+          <option value="Los Angeles, US">Los Angeles, US</option>
+          <option value="Cairo, EG">Cairo, EG</option>
+          <option value="Paris, FR">Paris, FR</option></select
+        ><br /><br />
+        <label for="endLocation">End Location:</label>
+        <select id="endLocation" name="endLocation">
+          <option value="New York City, US">New York City, US</option>
+          <option value="Tokyo, JP">Tokyo, JP</option>
+          <option value="London, UK">London, UK</option>
+          <option value="Los Angeles, US">Los Angeles, US</option>
+          <option value="Cairo, EG">Cairo, EG</option>
+          <option value="Paris, FR">Paris, FR</option></select
+        ><br /><br />
+        <label for="distance">Distance (km):</label>
+        <input
+          type="number"
+          id="distance"
+          name="distance"
+          required
+        /><br /><br />
+        <label for="urgency">Urgency:</label>
+        <select id="urgency" name="urgency">
+          <option value="High">High</option>
+          <option value="Medium">Medium</option>
+          <option value="Low">Low</option></select
+        ><br /><br />
+        <button type="button" id="predictButton">Predict</button>
+      </form>
+
+      <div class="result" id="predictionResult">
+        <h2>Prediction Result</h2>
+        <!--<p>Transportation Method: <span id="predictedMethod"></span></p>-->
+        <p>
+          Transportation Cost: <span id="transportationCost"></span> Canadian
+          Dollars
+        </p>
+        <p>Estimated Delivery Date: <span id="estimatedDate"></span></p>
+        <p>Optimized Method: <span id="optimizedMethod"></span></p>
+        <a href="/">Back to Home</a>
+      </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+      $(document).ready(function () {
+        $("#predictButton").click(function () {
+          // Collect form data
+          var formData = {
+            startLocation: $("#startLocation").val(),
+            endLocation: $("#endLocation").val(),
+            distance: $("#distance").val(),
+            urgency: $("#urgency").val(),
+          };
+
+          // Send POST request to FastAPI server
+          $.ajax({
+            url: "/predict",
+            type: "POST",
+            contentType: "application/json",
+            data: JSON.stringify(formData),
+            success: function (response) {
+              $("#predictedMethod").text(response.predicted_method);
+              $("#transportationCost").text(response.transportation_cost);
+              $("#estimatedDate").text(response.estimated_date);
+              $("#optimizedMethod").text(response.optimized_method);
+              $("#predictionResult").show();
+            },
+            error: function (xhr, status, error) {
+              console.error("Error:", error);
+            },
+          });
+        });
+      });
+    </script>
+  </body>
+</html>
