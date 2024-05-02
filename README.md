@@ -18,16 +18,16 @@ The project involves several key stages:
 4. **Decision Tree Integration:** Integrating the decision tree model into the application, providing input data to the model, and using Python libraries to display its structure.
 
 ## Sample dataset snippet (transportation_dataset.csv):
-<img width="461" alt="Screen Shot 2024-05-02 at 6 26 55 PM" src="https://github.com/ark22oct/Distributed-and-Cloud-Computing/assets/77360623/69b28cbd-910a-4d93-9c3a-a92be466efdc">
+<img width="500" alt="Screen Shot 2024-05-02 at 6 26 55 PM" src="https://github.com/ark22oct/Distributed-and-Cloud-Computing/assets/77360623/69b28cbd-910a-4d93-9c3a-a92be466efdc">
 
 ## Decision Tree Visualization
-<img width="462" alt="Screen Shot 2024-05-02 at 6 28 16 PM" src="https://github.com/ark22oct/Distributed-and-Cloud-Computing/assets/77360623/95e853a8-3967-462d-9d64-3aeaee5b595f">
+<img width="500" alt="Screen Shot 2024-05-02 at 6 28 16 PM" src="https://github.com/ark22oct/Distributed-and-Cloud-Computing/assets/77360623/95e853a8-3967-462d-9d64-3aeaee5b595f">
 
 ## Container Deployed On Docker
-<img width="452" alt="Screen Shot 2024-05-02 at 6 27 41 PM" src="https://github.com/ark22oct/Distributed-and-Cloud-Computing/assets/77360623/9c99aafe-185f-4d03-8626-67989c156e35">
+<img width="500" alt="Screen Shot 2024-05-02 at 6 27 41 PM" src="https://github.com/ark22oct/Distributed-and-Cloud-Computing/assets/77360623/9c99aafe-185f-4d03-8626-67989c156e35">
 
 ## Deployed On Public Cloud : 
-<img width="453" alt="Screen Shot 2024-05-02 at 6 26 20 PM" src="https://github.com/ark22oct/Distributed-and-Cloud-Computing/assets/77360623/c208459b-2200-47b0-83fa-4325de42de09">
+<img width="500" alt="Screen Shot 2024-05-02 at 6 26 20 PM" src="https://github.com/ark22oct/Distributed-and-Cloud-Computing/assets/77360623/c208459b-2200-47b0-83fa-4325de42de09">
 
 # Key Objectives
 1. Generates solutions for consistency, fault resilience and recovery in distributed system
