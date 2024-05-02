@@ -8,7 +8,7 @@ Specifically cloud infrastructures, virtualization, software defined networks an
 # Project (Cross Continental Transportation System) Overview
 The Cross Continent Transportation System project aims to address challenges faced in the logistics sector, particularly in cross-continental transport. With globalization and e-commerce driving the demand for efficient transportation solutions, there is a need for systems that can optimize routes, select suitable transportation methods, and accurately predict delivery dates. This project proposes the use of machine learning, specifically decision trees, to enhance transportation methods by considering factors such as distance, urgency, and cost.
 
-# Methodology
+## Methodology
 The project involves several key stages:
 
 1. **Creation of Dataset:** Generating a substantial dataset containing variables such as distance, importance, transportation cost, fuel efficiency, pollution, and volume of goods to transport.
