@@ -26,7 +26,7 @@ The project involves several key stages:
 ## Container Deployed on Docker
 <img width="600" alt="Screen Shot 2024-05-02 at 6 27 41 PM" src="https://github.com/ark22oct/Distributed-and-Cloud-Computing/assets/77360623/9c99aafe-185f-4d03-8626-67989c156e35">
 
-## Deployed On Public Cloud: https://coe892project2024g03.azurewebsites.net/
+## Deployed on the Azure Public Cloud: https://coe892project2024g03.azurewebsites.net/
 <img width="600" alt="Screen Shot 2024-05-02 at 6 26 20 PM" src="https://github.com/ark22oct/Distributed-and-Cloud-Computing/assets/77360623/c208459b-2200-47b0-83fa-4325de42de09">
 
 # Key Objectives
