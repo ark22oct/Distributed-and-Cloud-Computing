@@ -17,13 +17,13 @@ The project involves several key stages:
      transportation requirements.
 4. **Decision Tree Integration:** Integrating the decision tree model into the application, providing input data to the model, and using Python libraries to display its structure.
 
-## Sample dataset snippet (transportation_dataset.csv):
-<img width="600" alt="Screen Shot 2024-05-02 at 6 26 55 PM" src="https://github.com/ark22oct/Distributed-and-Cloud-Computing/assets/77360623/69b28cbd-910a-4d93-9c3a-a92be466efdc">
+## Sample Dataset Snippet (transportation_dataset.csv):
+<img width="915" alt="Screen Shot 2024-05-02 at 6 34 28 PM" src="https://github.com/ark22oct/Distributed-and-Cloud-Computing/assets/77360623/ef50b9e4-a416-420e-95b2-081cfdc51f1e">
 
 ## Decision Tree Visualization
 <img width="600" alt="Screen Shot 2024-05-02 at 6 28 16 PM" src="https://github.com/ark22oct/Distributed-and-Cloud-Computing/assets/77360623/95e853a8-3967-462d-9d64-3aeaee5b595f">
 
-## Container Deployed On Docker
+## Container Deployed on Docker
 <img width="600" alt="Screen Shot 2024-05-02 at 6 27 41 PM" src="https://github.com/ark22oct/Distributed-and-Cloud-Computing/assets/77360623/9c99aafe-185f-4d03-8626-67989c156e35">
 
 ## Deployed On Public Cloud: https://coe892project2024g03.azurewebsites.net/
